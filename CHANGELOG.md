@@ -13,6 +13,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   verified that FSDP models w/ ssd_offload enabled can correctly call model.state_dict()
   and model.load_state_dict(...) and thus successfully checkpoint and recover parameters
   stored as SsdFlatParameters.
+- FSDP: for ssd_offload Fix issues with SsdFlatParameter/view when .data was being overridden.
+  There was a bug in pytorch core that caused re-assigning SsdFlatParameter.data to
+  disable the __torch_dispatch__ mechanism and effectively revert back to a normal
+  tensor.
 
 ### Fixed
 
